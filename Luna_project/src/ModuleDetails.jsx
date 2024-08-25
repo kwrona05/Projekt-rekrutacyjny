@@ -1,22 +1,39 @@
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 function ModuleDetails() {
     
     const { id } = useParams();
     const [module, setModule] = useState(null);
+    const [error, setError] = useState({isError: false, error: null})
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const fetchModuleDetails = async () => {
             try {
                 const response = await fetch(`http://localhost:3001/modules/${id}`);
-        const data = await response.json();
-        setModule(data);
-      } catch (error) {
-        console.error('Error fetching module details:', error);
-      }
-    };
+                if(response.status === 404){
+                    throw new Error('Page not found')
+                }
+                console.log(response)
+                const data = await response.json();
+                setModule(data);
+            } catch (error) {
+                console.error('Error fetching module details:', error);
+                setError({error, isError: true})
+            }
+        };
 
     fetchModuleDetails();
   }, [id]);
+
+  if(error.isError){
+
+    return <div>
+        <h3>Something went wrong...</h3>
+        {error?.error?.message && (<h4>{error.error.message}</h4>)}
+    </div>
+  }
 
   if (!module) {
     return <div>Loading details...</div>
