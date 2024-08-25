@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ModuleDetails from "./ModuleDetails";
+import ModulesList from "./ModulesList";
 
 function App() {
     const [modules, setModules] = useState([]);
@@ -24,28 +26,12 @@ function App() {
             <div className="container">
             <h1>Modules list</h1>
             <Routes>
-            <Route path="/" element={<Module_list modules={modules} />} />
             <Route path="/modules/:id" element={<ModuleDetails />} />
+            <Route path="/" element={<ModulesList modules={modules} />} />
             </Routes>
             </div>
         </Router>
 
     );
 };
-
-const Module_list = ( {modules} ) => {
-    return(
-        <ul>
-                {modules.map((module) => (
-                    <li key={module.id}>
-                        <h2>{module.name}</h2>
-                        <p className="available">Available: {module.available ? 'Available' : 'Unavailable'}</p>
-                        <p className="temperature">Target Temperature: {module.targetTemperature} °C</p>
-                        <Link to={`/modules/${module.id}`}></Link>
-                    </li>
-                ))}
-            </ul>
-    );
-};
-
 export default App;
