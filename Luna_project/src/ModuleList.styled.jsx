@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const UlStyled = styled.ul`
-border: 1px solid black;
+  border: 1px solid black;
 `;
