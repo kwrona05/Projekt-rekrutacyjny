@@ -1,8 +1,10 @@
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom';
+import {UlStyled} from './ModuleList.styled';
+
 const ModulesList = ( {modules} ) => {
     return(
-        <ul>
+        <UlStyled>
                 {modules.map((module) => (
                     <li key={module.id}>
                         <h2>{module.name}</h2>
@@ -11,7 +13,7 @@ const ModulesList = ( {modules} ) => {
                         <Link to={`/modules/${module.id}`}>Show details</Link>
                     </li>
                 ))}
-            </ul>
+            </UlStyled>
     );
 };
 
