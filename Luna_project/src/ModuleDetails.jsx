@@ -10,6 +10,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 
 function ModuleDetails() {
@@ -53,7 +54,7 @@ function ModuleDetails() {
   const fetchHistoryData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/modules/${id}/history?start=${dateRange.start}&stop=${dateRange.stop}&mode=${mode}`
+        `http://localhost:3001/modules/${id}/history?start=${dataRange.start}&stop=${dataRange.stop}&mode=${mode}`
       );
       if (!response.ok) {
         throw new Error("Something goes wrong during fetching history data");
@@ -85,15 +86,6 @@ function ModuleDetails() {
     e.preventDefault();
     fetchHistoryData();
   };
-
-  if (error.isError) {
-    return (
-      <div>
-        <h3>Something went wrong...</h3>
-        {error?.error?.message && <h4>{error.error.message}</h4>}
-      </div>
-    );
-  }
 
   const handleOpenModal = () => {
     setEditData({
@@ -225,7 +217,7 @@ function ModuleDetails() {
       </form>
 
       {/*Chart*/}
-      {historyData.length > 0 && (
+      {historyData && historyData.length > 0 && (
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={historyData}>
             <CartesianGrid strokeDasharray="3 3" />
