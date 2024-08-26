@@ -2,21 +2,24 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { UlStyled } from "./ModuleList.styled";
 import ModuleTemperature from "./ModuleTemperature";
+import { LiStyled } from "./liStyled";
 
 const ModulesList = ({ modules }) => {
   return (
-    <UlStyled>
+    <ul className="ul-list">
       {modules.map((module) => (
-        <li key={module.id}>
+        <li className="list" key={module.id}>
           <h2>{module.name}</h2>
           <p className="available">
             Available: {module.available ? "Available" : "Unavailable"}
           </p>
           <ModuleTemperature targetTemperature={module.targetTemperature} />
-          <Link to={`/modules/${module.id}`}>Show details</Link>
+          <Link className="link" to={`/modules/${module.id}`}>
+            Show details
+          </Link>
         </li>
       ))}
-    </UlStyled>
+    </ul>
   );
 };
 
