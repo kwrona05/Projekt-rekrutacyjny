@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./App.css";
+import ModuleTemperature from "./ModuleTemperature";
 
 function ModuleDetails() {
   const { id } = useParams();
@@ -120,6 +121,7 @@ function ModuleDetails() {
       <p>
         <strong>Target Temperature:</strong> {module.targetTemperature} °C
       </p>
+      <ModuleTemperature targetTemperature={module.targetTemperature} />
 
       {module.available ? (
         <button onClick={handleOpenModal}>Edit module details</button>
