@@ -164,8 +164,8 @@ function ModuleDetails() {
   }
 
   return (
-    <div>
-      <h2>{module.name}</h2>
+    <div className="details-container">
+      <h2 className="name">{module.name}</h2>
       <p>{module.description}</p>
       <p>
         <strong>Available:</strong> {module.available ? "Yes" : "No"}
@@ -176,15 +176,19 @@ function ModuleDetails() {
       <ModuleTemperature targetTemperature={module.targetTemperature} />
 
       {module.available ? (
-        <button onClick={handleOpenModal}>Edit module details</button>
+        <button className="edit-btn" onClick={handleOpenModal}>
+          Edit module details
+        </button>
       ) : (
         <button disabled>Module unavailable</button>
       )}
 
-      <button onClick={() => navigate("/")}>Back to Module List</button>
+      <button className="back-btn" onClick={() => navigate("/")}>
+        Back to Module List
+      </button>
 
       {/*History*/}
-      <h3>Module Temperature History</h3>
+      <h3 className="module-history">Module Temperature History</h3>
       <form onSubmit={handleSubmit}>
         <label>
           Start Date:
@@ -193,6 +197,7 @@ function ModuleDetails() {
             name="start"
             value={dataRange.start}
             onChange={handleDataChange}
+            className="start-input"
             required
           />
         </label>
@@ -203,6 +208,7 @@ function ModuleDetails() {
             name="stop"
             value={dataRange.stop}
             onChange={handleDataChange}
+            className="stop-input"
             required
           />
         </label>
@@ -213,7 +219,9 @@ function ModuleDetails() {
             <option value="daily">Daily</option>
           </select>
         </label>
-        <button type="submit">Fetch History</button>
+        <button className="fetch-history" type="submit">
+          Fetch History
+        </button>
       </form>
 
       {/*Chart*/}

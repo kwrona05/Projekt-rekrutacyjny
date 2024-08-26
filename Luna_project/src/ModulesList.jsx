@@ -15,7 +15,7 @@ const ModulesList = ({ modules }) => {
           </p>
           <ModuleTemperature targetTemperature={module.targetTemperature} />
           <Link className="link" to={`/modules/${module.id}`}>
-            Show details
+            --Show details--
           </Link>
         </li>
       ))}
