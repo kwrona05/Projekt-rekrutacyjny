@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { UlStyled } from "./ModuleList.styled";
+import ModuleTemperature from "./ModuleTemperature";
 
 const ModulesList = ({ modules }) => {
   return (
@@ -11,9 +12,7 @@ const ModulesList = ({ modules }) => {
           <p className="available">
             Available: {module.available ? "Available" : "Unavailable"}
           </p>
-          <p className="temperature">
-            Target Temperature: {module.targetTemperature} °C
-          </p>
+          <ModuleTemperature targetTemperature={module.targetTemperature} />
           <Link to={`/modules/${module.id}`}>Show details</Link>
         </li>
       ))}
