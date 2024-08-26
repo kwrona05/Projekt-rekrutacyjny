@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import io from "socket.io";
+import { io } from "socket.io-client";
 
 const socket = io("localhost:3001", {
   transports: ["websocket"],
