@@ -45,12 +45,24 @@
     align-items: center;
   }
 
+  body {
+    background: linear-gradient(to bottom, honeydew 0%, lightgreen 100%)
+  }
+
   /*ModuleList*/
 
   h1 {
     display: flex;
     justify-content: center;
-    font-size: 40px;
+    font-size: 38px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 24px;
   }
 
   .ul-list {
@@ -67,8 +79,13 @@
     width: 1000px;
     height: 275px;
     text-align: center;
+    background-color: #F0FFFF;
   }
 
   .link {
     text-decoration: none;
   }
+
+  /*ModuleDetails*/
+
+  
