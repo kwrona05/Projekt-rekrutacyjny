@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { UlStyled } from "./ModuleList.styled";
 import ModuleTemperature from "./ModuleTemperature";
-import { LiStyled } from "./liStyled";
+import "./ModuleList.css";
 
 const ModulesList = ({ modules }) => {
   return (
@@ -10,7 +9,9 @@ const ModulesList = ({ modules }) => {
       {modules.map((module) => (
         <li className="list" key={module.id}>
           <h2>{module.name}</h2>
-          <p className="available">
+          <p
+            className={module.available ? "available-text" : "unavailable-text"}
+          >
             Available: {module.available ? "Available" : "Unavailable"}
           </p>
           <ModuleTemperature targetTemperature={module.targetTemperature} />
