@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./App.css";
+import "./ModuleDetails.css";
 import ModuleTemperature from "./ModuleTemperature";
 import {
   LineChart,
@@ -167,8 +167,9 @@ function ModuleDetails() {
     <div className="details-container">
       <h2 className="name">{module.name}</h2>
       <p>{module.description}</p>
-      <p>
-        <strong>Available:</strong> {module.available ? "Yes" : "No"}
+      <p className={module.available ? "available-text" : "unavailable-text"}>
+        <strong>Available:</strong>{" "}
+        {module.available ? "Available" : "Unavailable"}
       </p>
       <p>
         <strong>Target Temperature:</strong> {module.targetTemperature} °C
@@ -180,7 +181,9 @@ function ModuleDetails() {
           Edit module details
         </button>
       ) : (
-        <button disabled>Module unavailable</button>
+        <button className="edit-btn" disabled>
+          Module unavailable
+        </button>
       )}
 
       <button className="back-btn" onClick={() => navigate("/")}>
@@ -247,7 +250,6 @@ function ModuleDetails() {
           </LineChart>
         </ResponsiveContainer>
       )}
-
       {/* Modal */}
       {isEditModal && (
         <div className="modal">
@@ -289,8 +291,12 @@ function ModuleDetails() {
                 <span className="error">{validation.targetTemperature}</span>
               )}
             </label>
-            <button onClick={handleSaveChanges}>Save changes</button>
-            <button onClick={handleCloseModal}>Cancel</button>
+            <button className="modal-btn" onClick={handleSaveChanges}>
+              Save changes
+            </button>
+            <button className="modal-btn" onClick={handleCloseModal}>
+              Cancel
+            </button>
           </div>
         </div>
       )}
