@@ -2,8 +2,8 @@ name: Run test and build project
 
 on:
   push:
-    branches: 
-      - *
+    branches:
+      - "*"
   pull_request:
     branches:
       - main
@@ -21,22 +21,22 @@ jobs:
         node-version: [16.x, 18.x]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
 
-    - name: lint code
-      run: npm run lint
+      - name: lint code
+        run: npm run lint
 
-    - name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build
