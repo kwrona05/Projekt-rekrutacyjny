@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:updateSnapshots": "jest --updateSnapshot"
   },
   "dependencies": {
     "pre-commit": "^1.2.2",
@@ -48,5 +49,8 @@
     "build",
     "test"
   ],
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
 }

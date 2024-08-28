@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SNAPSHOT TESTS It matches saved snapshot 1`] = `
+<button
+  class="edit-btn"
+  data-testid="edit-module"
+>
+  Edit module details
+</button>
+`;
