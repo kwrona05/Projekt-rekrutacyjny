@@ -8,7 +8,7 @@ const ModulesList = ({ modules }) => {
     <ul className="ul-list">
       {modules.map((module) => (
         <li className="list" key={module.id} data-testid="modules-list">
-          <h2>{module.name}</h2>
+          <h2 data-testid="module-name">{module.name}</h2>
           <p
             className={module.available ? "available-text" : "unavailable-text"}
           >
