@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-import "@testing-library/jest-dom";
-// NOTE: jest-dom adds handy assertions to Jest and is recommended, but not required
+import "@testing-library/jest-dom"
 
-import { render, screen } from "@testing-library/react";
-
-import App from "./App";
+import { render, screen } from '@testing-library/react'
+import ModuleList from './ModulesList';
+import { MemoryRouter } from "react-router-dom";
 
 const mockModules = [
   {
@@ -40,20 +39,12 @@ const mockModules = [
 
   // .toBeInTheDocument() is an assertion that comes from jest-dom
   // otherwise you could use .toBeDefined()
+test("testing link elements", () => {
 
-
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve(mockModules),
-    })
-  );
-  
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-  
-  test("shows main page title", () => {
-  const pageTitle = "Modules list";
-  render(<App>{pageTitle}</App>);
-  expect(screen.getByText(pageTitle)).toBeInTheDocument();
-});
+  render(<MemoryRouter><ModuleList modules={mockModules} /></MemoryRouter>)
+    const links = screen.getAllByTestId('modules-list')
+    
+    expect(links).not.toBeUndefined()
+    expect(links.length).toBe(3)
+}
+)
