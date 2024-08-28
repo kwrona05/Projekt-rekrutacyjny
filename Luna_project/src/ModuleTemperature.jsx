@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import PropTypes from "prop-types";
 
 const socket = io("localhost:3001", {
   transports: ["websocket"],
@@ -35,4 +36,5 @@ const ModuleTemperature = ({ targetTemperature }) => {
     </div>
   );
 };
+ModuleTemperature.propTypes = { targetTemperature: PropTypes.number };
 export default ModuleTemperature;
