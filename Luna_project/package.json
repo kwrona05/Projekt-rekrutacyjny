@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "pre-commit": "^1.2.2",
@@ -46,5 +47,6 @@
     "lint",
     "build",
     "test"
-  ]
+  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
