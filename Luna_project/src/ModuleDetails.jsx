@@ -177,7 +177,11 @@ function ModuleDetails() {
       <ModuleTemperature targetTemperature={module.targetTemperature} />
 
       {module.available ? (
-        <button className="edit-btn" onClick={handleOpenModal}>
+        <button
+          className="edit-btn"
+          data-testid="edit-module"
+          onClick={handleOpenModal}
+        >
           Edit module details
         </button>
       ) : (
@@ -191,7 +195,9 @@ function ModuleDetails() {
       </button>
 
       {/*History*/}
-      <h3 className="module-history">Module Temperature History</h3>
+      <h3 className="module-history" data-testid="history-module">
+        Module Temperature History
+      </h3>
       <form onSubmit={handleSubmit}>
         <label>
           Start Date:
@@ -201,6 +207,7 @@ function ModuleDetails() {
             value={dataRange.start}
             onChange={handleDataChange}
             className="start-input"
+            data-testid="input-element"
             required
           />
         </label>
@@ -212,14 +219,23 @@ function ModuleDetails() {
             value={dataRange.stop}
             onChange={handleDataChange}
             className="stop-input"
+            data-testid="input-element"
             required
           />
         </label>
         <label>
           Mode:
-          <select value={mode} onChange={handleModeChange}>
-            <option value="hourly">Hourly</option>
-            <option value="daily">Daily</option>
+          <select
+            value={mode}
+            data-testid="select-element"
+            onChange={handleModeChange}
+          >
+            <option value="hourly" data-testid="hourly">
+              Hourly
+            </option>
+            <option value="daily" data-testid="daily">
+              Daily
+            </option>
           </select>
         </label>
         <button className="fetch-history" type="submit">
