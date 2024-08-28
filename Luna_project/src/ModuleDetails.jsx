@@ -39,7 +39,6 @@ function ModuleDetails() {
         if (response.status === 404) {
           throw new Error("Page not found");
         }
-        console.log(response);
         const data = await response.json();
         setModule(data);
       } catch (error) {
