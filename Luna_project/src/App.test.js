@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import "@testing-library/jest-dom";
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import App from "./App";
 import { mockModules } from "../__mocks__/mockModules";
@@ -17,9 +17,11 @@ beforeEach(() => {
 });
 
 describe("COMPONENT TESTS", () => {
-  test("shows main page title", () => {
+  test("shows main page title", async () => {
     const pageTitle = "Modules list";
     render(<App>{pageTitle}</App>);
-    expect(screen.getByText(pageTitle)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(pageTitle)).toBeInTheDocument();
+    });
   });
 });

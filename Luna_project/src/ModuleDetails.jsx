@@ -16,9 +16,8 @@ import PropTypes from "prop-types";
 
 function ModuleDetails({ modules }) {
   const { id } = useParams();
-  const foundId = modules.find((m) => m.id === id);
+  const foundModuleData = modules.find((m) => m.id === id);
 
-  console.log(foundId);
   const [module, setModule] = useState(null);
   const [error, setError] = useState({ isError: false, error: null });
   const [isEditModal, setIsEditModal] = useState(false);
@@ -44,6 +43,7 @@ function ModuleDetails({ modules }) {
           throw new Error("Page not found");
         }
         const data = await response.json();
+
         setModule(data);
       } catch (error) {
         console.error("Error fetching module details:", error);
@@ -180,7 +180,9 @@ function ModuleDetails({ modules }) {
       </p>
       <ModuleTemperature
         targetTemperature={parseFloat(module.targetTemperature)}
-        temperature={parseFloat(foundId.temperature)}
+        temperature={
+          foundModuleData ? parseFloat(foundModuleData.temperature) : null
+        }
       />
       {module.available ? (
         <button
