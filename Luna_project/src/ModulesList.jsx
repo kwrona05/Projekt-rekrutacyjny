@@ -14,7 +14,10 @@ const ModulesList = ({ modules }) => {
           >
             Available: {module.available ? "Available" : "Unavailable"}
           </p>
-          <ModuleTemperature targetTemperature={module.targetTemperature} />
+          <ModuleTemperature
+            targetTemperature={parseFloat(module.targetTemperature)}
+            temperature={parseFloat(module.temperature)}
+          />
           <Link className="link" to={`/modules/${module.id}`}>
             --Show details--
           </Link>

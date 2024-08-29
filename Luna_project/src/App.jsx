@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ModuleDetails from "./ModuleDetails";
-import ModulesList from "./ModulesList";
+
+import Modules from "./Modules";
 import "./App.css";
 
 function App() {
@@ -22,16 +21,10 @@ function App() {
     fetchModules();
   }, []);
 
-  return (
-    <Router>
-      <div className="container">
-        <h1>Modules list</h1>
-        <Routes>
-          <Route path="/modules/:id" element={<ModuleDetails />} />
-          <Route path="/" element={<ModulesList modules={modules} />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+  if (modules.length === 0) {
+    return <div>loading..</div>;
+  }
+
+  return <Modules modules={modules} />;
 }
 export default App;

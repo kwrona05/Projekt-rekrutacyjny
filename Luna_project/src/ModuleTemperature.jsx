@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import PropTypes from "prop-types";
 
-const socket = io("localhost:3001", {
-  transports: ["websocket"],
-});
-
-const ModuleTemperature = ({ targetTemperature }) => {
-  const [temperature, setTemperature] = useState(null);
-
-  useEffect(() => {
-    socket.on("temperature", (data) => {
-      const { temperature } = data;
-      setTemperature(temperature);
-    });
-    return () => {
-      socket.off("temperature");
-    };
-  }, []);
+const ModuleTemperature = ({ targetTemperature, temperature }) => {
+  if (isNaN(temperature)) {
+    temperature = null;
+  }
 
   const getTemperatureColor = () => {
     if (temperature === null) return "black";
@@ -27,14 +13,23 @@ const ModuleTemperature = ({ targetTemperature }) => {
 
   return (
     <div>
+      <h3>Target temperature</h3>
+      {targetTemperature !== null ? (
+        <p>{targetTemperature}°C</p>
+      ) : (
+        <p>No data</p>
+      )}
       <h3>Current temperature:</h3>
       {temperature !== null ? (
         <p style={{ color: getTemperatureColor() }}>{temperature}°C</p>
       ) : (
-        <p>Awaiting for data...</p>
+        <p>No data. Sensor unavailable</p>
       )}
     </div>
   );
 };
-ModuleTemperature.propTypes = { targetTemperature: PropTypes.number };
+ModuleTemperature.propTypes = {
+  targetTemperature: PropTypes.number,
+  temperature: PropTypes.number,
+};
 export default ModuleTemperature;

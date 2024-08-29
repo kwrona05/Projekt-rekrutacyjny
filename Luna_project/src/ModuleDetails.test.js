@@ -13,6 +13,8 @@ global.fetch = jest.fn(() =>
   })
 );
 
+const mockModuleWithTemperature = { ...mockModules[0], temperature: 11 };
+
 beforeEach(() => {
   fetch.mockClear();
 });
@@ -21,7 +23,7 @@ describe("COMPONENT TESTS", () => {
   test("Is button in document", async () => {
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 
@@ -35,7 +37,7 @@ describe("COMPONENT TESTS", () => {
   test("testing text in h3 element", async () => {
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 
@@ -49,7 +51,7 @@ describe("COMPONENT TESTS", () => {
   test("Are two inputs in document", async () => {
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 
@@ -63,7 +65,7 @@ describe("COMPONENT TESTS", () => {
   test("Is select defined", async () => {
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 
@@ -76,7 +78,7 @@ describe("COMPONENT TESTS", () => {
   test("Are two opitons with correct text in document", async () => {
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 
@@ -97,9 +99,14 @@ describe("COMPONENT TESTS", () => {
 });
 describe("SNAPSHOT TESTS", () => {
   test("It matches saved snapshot", async () => {
+    jest.mock("react-router-dom", () => ({
+      ...jest.requireActual("react-router-dom"),
+      useParams: jest.fn(() => mockModules[0].id),
+    }));
+
     render(
       <MemoryRouter>
-        <ModuleDetails />
+        <ModuleDetails modules={[mockModuleWithTemperature]} />
       </MemoryRouter>
     );
 

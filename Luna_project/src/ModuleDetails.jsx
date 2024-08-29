@@ -12,9 +12,12 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import PropTypes from "prop-types";
 
-function ModuleDetails() {
+function ModuleDetails({ modules }) {
   const { id } = useParams();
+  const foundModuleData = modules.find((m) => m.id === id);
+
   const [module, setModule] = useState(null);
   const [error, setError] = useState({ isError: false, error: null });
   const [isEditModal, setIsEditModal] = useState(false);
@@ -40,6 +43,7 @@ function ModuleDetails() {
           throw new Error("Page not found");
         }
         const data = await response.json();
+
         setModule(data);
       } catch (error) {
         console.error("Error fetching module details:", error);
@@ -102,7 +106,11 @@ function ModuleDetails() {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditData((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "targetTemperature") {
+      setEditData((prevState) => ({ ...prevState, [name]: parseFloat(value) }));
+    } else {
+      setEditData((prevState) => ({ ...prevState, [name]: value }));
+    }
   };
 
   const validateForm = () => {
@@ -170,11 +178,12 @@ function ModuleDetails() {
         <strong>Available:</strong>{" "}
         {module.available ? "Available" : "Unavailable"}
       </p>
-      <p>
-        <strong>Target Temperature:</strong> {module.targetTemperature} °C
-      </p>
-      <ModuleTemperature targetTemperature={module.targetTemperature} />
-
+      <ModuleTemperature
+        targetTemperature={parseFloat(module.targetTemperature)}
+        temperature={
+          foundModuleData ? parseFloat(foundModuleData.temperature) : null
+        }
+      />
       {module.available ? (
         <button
           className="edit-btn"
@@ -188,11 +197,9 @@ function ModuleDetails() {
           Module unavailable
         </button>
       )}
-
       <button className="back-btn" onClick={() => navigate("/")}>
         Back to Module List
       </button>
-
       {/*History*/}
       <h3 className="module-history" data-testid="history-module">
         Module Temperature History
@@ -241,7 +248,6 @@ function ModuleDetails() {
           Fetch History
         </button>
       </form>
-
       {/*Chart*/}
       {historyData && historyData.length > 0 && (
         <ResponsiveContainer width="100%" height={400}>
@@ -318,4 +324,16 @@ function ModuleDetails() {
     </div>
   );
 }
+
+ModuleDetails.propTypes = {
+  modules: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      available: PropTypes.bool,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      targetTemperature: PropTypes.number,
+    })
+  ),
+};
 export default ModuleDetails;
