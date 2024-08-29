@@ -178,9 +178,6 @@ function ModuleDetails({ modules }) {
         <strong>Available:</strong>{" "}
         {module.available ? "Available" : "Unavailable"}
       </p>
-      <p>
-        <strong>Target Temperature:</strong> {module.targetTemperature} °C
-      </p>
       <ModuleTemperature
         targetTemperature={parseFloat(module.targetTemperature)}
         temperature={parseFloat(foundId.temperature)}

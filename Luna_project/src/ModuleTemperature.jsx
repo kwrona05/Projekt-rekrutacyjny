@@ -13,6 +13,12 @@ const ModuleTemperature = ({ targetTemperature, temperature }) => {
 
   return (
     <div>
+      <h3>Target temperature</h3>
+      {targetTemperature !== null ? (
+        <p>{targetTemperature}°C</p>
+      ) : (
+        <p>No data</p>
+      )}
       <h3>Current temperature:</h3>
       {temperature !== null ? (
         <p style={{ color: getTemperatureColor() }}>{temperature}°C</p>
