@@ -25,6 +25,10 @@ body {
     color: #007BFF;
     margin-bottom: 20px;
   }
+
+  h3 {
+    color: #007BFF;
+  }
   
   p {
     font-size: 1.2rem;
