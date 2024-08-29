@@ -16,6 +16,9 @@ import PropTypes from "prop-types";
 
 function ModuleDetails({ modules }) {
   const { id } = useParams();
+  const foundId = modules.find((m) => m.id === id);
+
+  console.log(foundId);
   const [module, setModule] = useState(null);
   const [error, setError] = useState({ isError: false, error: null });
   const [isEditModal, setIsEditModal] = useState(false);
@@ -180,8 +183,8 @@ function ModuleDetails({ modules }) {
       </p>
       <ModuleTemperature
         targetTemperature={parseFloat(module.targetTemperature)}
+        temperature={parseFloat(foundId.temperature)}
       />
-
       {module.available ? (
         <button
           className="edit-btn"
@@ -195,11 +198,9 @@ function ModuleDetails({ modules }) {
           Module unavailable
         </button>
       )}
-
       <button className="back-btn" onClick={() => navigate("/")}>
         Back to Module List
       </button>
-
       {/*History*/}
       <h3 className="module-history" data-testid="history-module">
         Module Temperature History
@@ -248,7 +249,6 @@ function ModuleDetails({ modules }) {
           Fetch History
         </button>
       </form>
-
       {/*Chart*/}
       {historyData && historyData.length > 0 && (
         <ResponsiveContainer width="100%" height={400}>
