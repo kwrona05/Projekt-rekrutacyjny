@@ -12,8 +12,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import PropTypes from "prop-types";
 
-function ModuleDetails() {
+function ModuleDetails({ modules }) {
   const { id } = useParams();
   const [module, setModule] = useState(null);
   const [error, setError] = useState({ isError: false, error: null });
@@ -102,7 +103,11 @@ function ModuleDetails() {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditData((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "targetTemperature") {
+      setEditData((prevState) => ({ ...prevState, [name]: parseFloat(value) }));
+    } else {
+      setEditData((prevState) => ({ ...prevState, [name]: value }));
+    }
   };
 
   const validateForm = () => {
@@ -173,7 +178,9 @@ function ModuleDetails() {
       <p>
         <strong>Target Temperature:</strong> {module.targetTemperature} °C
       </p>
-      <ModuleTemperature targetTemperature={module.targetTemperature} />
+      <ModuleTemperature
+        targetTemperature={parseFloat(module.targetTemperature)}
+      />
 
       {module.available ? (
         <button
@@ -318,4 +325,16 @@ function ModuleDetails() {
     </div>
   );
 }
+
+ModuleDetails.propTypes = {
+  modules: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      available: PropTypes.bool,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      targetTemperature: PropTypes.number,
+    })
+  ),
+};
 export default ModuleDetails;
