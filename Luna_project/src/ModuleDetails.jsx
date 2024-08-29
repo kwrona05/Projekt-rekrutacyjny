@@ -248,7 +248,6 @@ function ModuleDetails({ modules }) {
           Fetch History
         </button>
       </form>
-      {/*Chart*/}
       {historyData && historyData.length > 0 && (
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={historyData}>
@@ -271,7 +270,6 @@ function ModuleDetails({ modules }) {
           </LineChart>
         </ResponsiveContainer>
       )}
-      {/* Modal */}
       {isEditModal && (
         <div className="modal">
           <div className="modal-content">
